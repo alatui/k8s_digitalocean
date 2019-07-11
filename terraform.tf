@@ -73,22 +73,5 @@ resource "kubernetes_cluster_role_binding" "tiller" {
 
 
 
-variable "jenkins_adminUser" {}
-variable "jenkins_adminPassword" {}
-resource "helm_release" "jenkins3" {
-    name      = "jenkins3"
-    chart     = "stable/jenkins"
-
-    set {
-        name  = "master.adminUser"
-        value = "${var.jenkins_adminUser}"
-    }
-
-    set {
-        name = "master.adminPassword"
-        value = "${var.jenkins_adminPassword}"
-    }
-}
-
 
 
