@@ -1,0 +1,7 @@
+credentials/*
+.terraform/*
+.DS_Store
+.terraform
+*.tfstate
+*.tfstate.backup
+myplan
