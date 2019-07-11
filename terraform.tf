@@ -72,6 +72,22 @@ resource "kubernetes_cluster_role_binding" "tiller" {
 }
 
 
+data "helm_repository" "incubator" {
+    name = "nginx-stable"
+    url  = "https://helm.nginx.com/stable"
+}
+
+
+resource "helm_release" "nginx-ingress" {
+    name      = "nginx-ingress"
+    chart     = "nginx-stable/nginx-ingress"
+
+    set {
+        name  = "controller.replicaCount"
+        value = 2
+    }
+}
+
 
 
 
