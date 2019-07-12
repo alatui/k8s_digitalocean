@@ -5,3 +5,4 @@ credentials/*
 *.tfstate
 *.tfstate.backup
 myplan
+terraform.tfvars
