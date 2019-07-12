@@ -89,5 +89,41 @@ resource "helm_release" "nginx-ingress" {
 }
 
 
+variable "jenkins_adminUser" {}
+variable "jenkins_adminPassword" {}
+resource "helm_release" "jenkins4" {
+    name      = "jenkins4"
+    chart     = "stable/jenkins"
 
+    set {
+        name  = "master.adminUser"
+        value = "${var.jenkins_adminUser}"
+    }
+
+    set {
+        name = "master.adminPassword"
+        value = "${var.jenkins_adminPassword}"
+    }
+
+    set {
+        name = "master.ingress.enabled"
+        value = "true"
+    }
+
+    set {
+        name = "master.ingress.hostName"
+        value = "jenkins.aylien.com"
+    }
+
+    set {
+        name = "master.serviceType"
+        value = "ClusterIP"
+    }
+
+    set {
+        name = "master.servicePort"
+        value = "80"
+    }
+
+}
 
