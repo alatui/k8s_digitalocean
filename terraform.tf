@@ -124,6 +124,28 @@ resource "helm_release" "jenkins4" {
         name = "master.servicePort"
         value = "80"
     }
+}
 
+
+resource "kubernetes_service_account" "jenkins" {
+  metadata {
+    name = "jenkins"
+  }
+}
+
+
+resource "kubernetes_cluster_role_binding" "jenkins" {
+  metadata {
+    name = "jenkins"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind = "ClusterRole"
+    name = "cluster-admin"
+  }
+  subject {
+    kind = "ServiceAccount"
+    name = "jenkins"
+  }
 }
 
